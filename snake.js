@@ -13,7 +13,7 @@ var foodY;
 
 var gameOver=false;
 
-window.onload=fucntion();
+window.onload=function()
 {
     board=document.getElementById("board");
     board.height =rows*blockSize;
@@ -23,13 +23,13 @@ window.onload=fucntion();
     placeFood();
     document.addEventListener("keyup",changeDirection);
     setInterval(update,1000/10);
-    update();
+
 
 }
 
 function update()
 {
-    if(gameover){
+    if(gameOver){
         return;
     }
     
@@ -37,7 +37,7 @@ function update()
     context.fillRect(0,0,board.width,board.height);
 
     context.fillStyle="red";
-    context.filRect(foodX,foodY,blockSize,blockSize);
+    context.fillRect(foodX,foodY,blockSize,blockSize);
 
     if(snakeX==foodX && snakeY==foodY){
         placeFood()
@@ -47,9 +47,9 @@ function update()
     context.fillStyle="lime";
     snakeX+=velocityX*blockSize;
     snakeY+=velocityY*blockSize;
-    context.filRect(snakeX,snakeY,blockSize,blockSize);
+    context.fillRect(snakeX,snakeY,blockSize,blockSize);
     
-    if(snakeX<0 ||snakeX >cols*blockSize || snakeY<0 || snakeY> rows*blocksize){
+    if(snakeX<0 ||snakeX <cols*blockSize || snakeY<0 || snakeY< rows*blocksize){
         gameover=true;
         alert("GAME OVER!");
     }
@@ -67,23 +67,23 @@ function changeDirection(e)
 {
    if (e.code=="ArrowUp" && velocityY !=1){
     velocityX=0;
-    verlocityY=-1;
+    velocityY=-1;
    }
 
-   else if (e.code=="ArrowRight" && velocity !=-1){
+   else if (e.code=="ArrowRight" && velocityX !=-1){
     velocityX=1;
-    verlocityY=0;
+    velocityY=0;
    }
 
    else if (e.code=="ArrowDown" && velocityY!=1)
    {
     velocityX=0;
-    verlocityY=1;
+    velocityY=1;
    }
 
    if (e.code=="ArrowLeft" && velocityX !=1)
    {
     velocityX=-1;
-    verlocityY=0;
+    velocityY=0;
    }
 }
